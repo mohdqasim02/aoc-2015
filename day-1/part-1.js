@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-const parse = (rawText) => {
+const parseInstructions = (rawText) => {
   return rawText.trim().split("").map(instruction => {
     if (instruction === '(') return 1;
     return -1;
@@ -15,7 +15,7 @@ const finalFloor = (instructions) => {
 
 const main = () => {
   const rawText = fs.readFileSync("day-1/input.txt", "utf-8");
-  const instructions = parse(rawText);
+  const instructions = parseInstructions(rawText);
   console.log(finalFloor(instructions));
 }
 
