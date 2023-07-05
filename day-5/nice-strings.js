@@ -19,18 +19,34 @@ const isNiceString = (text) => {
   return Object.values(niceStringParts).every(identity);
 }
 
-const numOfNiceStrings = (strings) => {
+const PairAppearingTwice = new RegExp(/(..)(.*)(\1)/g);
+const SandwichLetters = new RegExp(/(.).\1/g);
+
+const isNicerString = (text) => {
+  const nicerStringParts = {
+    sandwich: extractPattern(text, SandwichLetters).length >= 1,
+    pair: extractPattern(text, PairAppearingTwice).length >= 1,
+  }
+
+  return Object.values(nicerStringParts).every(identity);
+}
+
+const numOfNiceStrings = (strings, isNice) => {
   return strings.trim().split("\n")
-    .map(isNiceString).filter(identity).length;
+    .map(isNice).filter(identity).length;
 }
 
 const main = () => {
   const rawText = fs.readFileSync("day-5/input.txt", "utf-8");
   // PART-1
-  console.log("Num of nice strings: ", numOfNiceStrings(rawText));
+  console.log("Num of nice strings: ", numOfNiceStrings(rawText, isNiceString));
+
+  // PART-2
+  console.log("Num of nicer strings: ", numOfNiceStrings(rawText, isNicerString));
 }
 
 main();
 
 exports.isNiceString = isNiceString;
+exports.isNicerString = isNicerString;
 exports.numOfNiceStrings = numOfNiceStrings;
