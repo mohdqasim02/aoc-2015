@@ -1,5 +1,6 @@
 const fs = require("fs");
 
+const isEven = (number) => number % 2 === 0;
 const toMove = (instruction) => {
   const moves = {
     '^': (position) => position.y += 1,
@@ -33,14 +34,10 @@ const numOfVisitedHousesIn2ndYear = (instructions) => {
   const roboSantaPosition = { x: 0, y: 0 };
 
   instructions.forEach((move, index) => {
-    if (index % 2 === 1) {
-      visitedHouseCoordinates[Object.values(santaPosition)] = 1;
-      move(santaPosition);
-      return;
-    }
+    const position = isEven(index) ? roboSantaPosition : santaPosition;
 
-    visitedHouseCoordinates[Object.values(roboSantaPosition)] = 1;
-    move(roboSantaPosition);
+    visitedHouseCoordinates[Object.values(position)] = 1;
+    move(position);
   });
 
   return Object.keys(visitedHouseCoordinates).length;
@@ -51,10 +48,10 @@ const main = () => {
   const instructions = parseInstructions(rawInstructions);
 
   // PART-1
-  console.log("Houses with atleast one gift: ", numOfVisitedHouses(instructions));
+  console.log("Houses with atleast one gift in 1st year: ", numOfVisitedHouses(instructions));
 
   // PART-2
-  console.log("Houses with atleast one gift: ", numOfVisitedHousesIn2ndYear(instructions));
+  console.log("Houses with atleast one gift in 2nd year: ", numOfVisitedHousesIn2ndYear(instructions));
 }
 
 main();
