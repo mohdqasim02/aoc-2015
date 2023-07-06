@@ -5,8 +5,16 @@ class Light {
     this.#isLit = false;
   }
 
-  turnOn() {
+  setLit() {
     this.#isLit = true;
+  }
+
+  setUnlit() {
+    this.#isLit = false;
+  }
+
+  toggle() {
+    this.#isLit = !this.#isLit;
   }
 
   get isLit() {
