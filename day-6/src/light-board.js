@@ -4,10 +4,10 @@ const newArrayOf = (size) => new Array(size).fill();
 const arrayOf1000Lights = () => newArrayOf(1000).map(() => new Light());
 
 class LightBoard {
-  #lightBoard;
+  #board;
 
   constructor() {
-    this.#lightBoard = this.#generateGridOfLights();
+    this.#board = this.#generateGridOfLights();
   }
 
   #generateGridOfLights() {
@@ -15,23 +15,27 @@ class LightBoard {
   }
 
   turnOn({ x, y }) {
-    const light = this.#lightBoard[x][y];
+    const light = this.#board[x][y];
     light.setLit();
   }
 
   turnOff({ x, y }) {
-    const light = this.#lightBoard[x][y];
+    const light = this.#board[x][y];
     light.setUnlit();
   }
 
   toggle({ x, y }) {
-    const light = this.#lightBoard[x][y];
+    const light = this.#board[x][y];
     light.toggle();
   }
 
   isLitAt({ x, y }) {
-    const light = this.#lightBoard[x][y];
+    const light = this.#board[x][y];
     return light.isLit;
+  }
+
+  get board() {
+    return this.#board;
   }
 }
 
