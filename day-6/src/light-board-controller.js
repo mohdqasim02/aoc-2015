@@ -18,6 +18,24 @@ class LightBoardController {
 
     return boardArea.every(light => light.isLit);
   }
+
+  isBoardAreaUnlit(start, end) {
+    const boardArea = this.#getBoardArea(start, end);
+
+    return boardArea.every(light => !light.isLit);
+  }
+
+  fudge([command, start, end]) {
+    const validCommands = {
+      on: (light) => light.setLit(),
+      off: (light) => light.setUnlit(),
+      toggle: (light) => light.toggle()
+    };
+    const boardArea = this.#getBoardArea(start, end);
+    const commandToAction = validCommands[command];
+
+    boardArea.forEach(commandToAction);
+  }
 }
 
 exports.LightBoardController = LightBoardController;
