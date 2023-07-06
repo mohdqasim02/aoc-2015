@@ -108,4 +108,25 @@ describe("LightBoardController", () => {
       assert.deepStrictEqual(actual, expected);
     });
   });
+
+  describe("execute", () => {
+    it("should fudge instruction one by one and give count of lit lights", () => {
+      const lbc = new LightBoardController(new LightBoard());
+      const instructions = [
+        ["on", { rowStart: 0, colStart: 0 }, { rowEnd: 1, colEnd: 1 }],
+        ["toggle", { rowStart: 7, colStart: 7 }, { rowEnd: 10, colEnd: 10 }]
+      ];
+
+      assert.deepStrictEqual(lbc.execute(instructions), 20);
+    });
+
+    it("should give zero when all lights are unlit", () => {
+      const lbc = new LightBoardController(new LightBoard());
+      const instructions = [
+        ["off", { rowStart: 0, colStart: 0 }, { rowEnd: 1, colEnd: 1 }]
+      ];
+
+      assert.deepStrictEqual(lbc.execute(instructions), 0);
+    });
+  });
 });

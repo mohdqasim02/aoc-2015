@@ -36,6 +36,13 @@ class LightBoardController {
 
     boardArea.forEach(commandToAction);
   }
+
+  execute(instructions) {
+    instructions.forEach((instruction) => this.fudge(instruction));
+
+    return this.#lightBoard.board.flat()
+      .filter(light => light.isLit).length;
+  }
 }
 
 exports.LightBoardController = LightBoardController;
