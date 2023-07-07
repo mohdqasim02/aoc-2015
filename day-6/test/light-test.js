@@ -54,4 +54,39 @@ describe("Light", () => {
       assert.strictEqual(led.isLit, false);
     });
   });
+
+  describe("incrementBrightness", () => {
+    it("should increase the brightness of light by one", () => {
+      const led = new Light();
+
+      led.incrementBrightness();
+      assert.strictEqual(led.brightness, 1);
+    });
+  });
+
+  describe("decrementBrightness", () => {
+    it("should decrease the brightness of light by one", () => {
+      const led = new Light();
+
+      led.incrementBrightness();
+      led.decrementBrightness();
+      assert.strictEqual(led.brightness, 0);
+    });
+
+    it("should decrease the brightness to a minimun of zero", () => {
+      const led = new Light();
+
+      led.decrementBrightness();
+      assert.strictEqual(led.brightness, 0);
+    });
+  });
+
+  describe("increaseBrightnessByTwo", () => {
+    it("should increase the brightness of light by two", () => {
+      const led = new Light();
+
+      led.increaseBrightnessByTwo();
+      assert.strictEqual(led.brightness, 2);
+    });
+  });
 });
