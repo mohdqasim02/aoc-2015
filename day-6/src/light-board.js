@@ -37,6 +37,21 @@ class LightBoard {
     lights.forEach(light => light.toggle());
   }
 
+  brightenLights(start, end) {
+    const lights = this.#getBoardArea(start, end);
+    lights.forEach(light => light.incrementBrightness());
+  }
+
+  darkenLights(start, end) {
+    const lights = this.#getBoardArea(start, end);
+    lights.forEach(light => light.decrementBrightness());
+  }
+
+  brightenLightsTwice(start, end) {
+    const lights = this.#getBoardArea(start, end);
+    lights.forEach(light => light.increaseBrightnessByTwo());
+  }
+
   get board() {
     return this.#board.map(row => row.map(light => {
       return {

@@ -51,4 +51,49 @@ describe("LightBoard", () => {
       assert.strictEqual(lightBoard.board[0][1].isLit, false);
     });
   });
+
+  describe("brightenLights", () => {
+    it("should brighten up the lights by one inside the given coordinates", () => {
+      const lightBoard = new LightBoard();
+      const end = { rowEnd: 1, colEnd: 1 };
+      const start = { rowStart: 0, colStart: 0 };
+
+      lightBoard.brightenLights(start, end);
+
+      assert.strictEqual(lightBoard.board[0][0].brightness, 1);
+      assert.strictEqual(lightBoard.board[0][1].brightness, 1);
+      assert.strictEqual(lightBoard.board[1][0].brightness, 1);
+      assert.strictEqual(lightBoard.board[1][0].brightness, 1);
+      assert.strictEqual(lightBoard.board[0][2].brightness, 0);
+      assert.strictEqual(lightBoard.board[1][2].brightness, 0);
+    });
+  });
+
+  describe("darkenLights", () => {
+    it("should darken the lights by one inside the given coordinates", () => {
+      const lightBoard = new LightBoard();
+      const end = { rowEnd: 1, colEnd: 1 };
+      const start = { rowStart: 0, colStart: 0 };
+
+      lightBoard.brightenLights(start, end);
+      assert.strictEqual(lightBoard.board[0][0].brightness, 1);
+      assert.strictEqual(lightBoard.board[0][1].brightness, 1);
+
+      lightBoard.darkenLights(start, end);
+      assert.strictEqual(lightBoard.board[0][0].brightness, 0);
+      assert.strictEqual(lightBoard.board[0][1].brightness, 0);
+    });
+  });
+
+  describe("brightenLightsTwice", () => {
+    it("should brighten the lights by two inside the given coordinates", () => {
+      const lightBoard = new LightBoard();
+      const end = { rowEnd: 1, colEnd: 1 };
+      const start = { rowStart: 0, colStart: 0 };
+
+      lightBoard.brightenLightsTwice(start, end);
+      assert.strictEqual(lightBoard.board[0][0].brightness, 2);
+      assert.strictEqual(lightBoard.board[0][1].brightness, 2);
+    });
+  });
 });
