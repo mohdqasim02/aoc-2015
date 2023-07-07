@@ -5,41 +5,28 @@ class LightBoardController {
     this.#lightBoard = lightBoard;
   }
 
-  #getBoardArea(start, end) {
-    const { rowEnd, colEnd } = end;
-    const { rowStart, colStart } = start;
-
-    return this.#lightBoard.board.slice(rowStart, rowEnd + 1)
-      .flatMap(lights => lights.slice(colStart, colEnd + 1));
-  }
-
-  isBoardAreaLit(start, end) {
-    const boardArea = this.#getBoardArea(start, end);
-
-    return boardArea.every(light => light.isLit);
-  }
-
-  isBoardAreaUnlit(start, end) {
-    const boardArea = this.#getBoardArea(start, end);
-
-    return boardArea.every(light => !light.isLit);
-  }
-
-  fudge([command, start, end]) {
+  setUpLights([command, start, end]) {
     const validCommands = {
-      on: (light) => light.setLit(),
-      off: (light) => light.setUnlit(),
-      toggle: (light) => light.toggle()
+      on: (start, end) => this.#lightBoard.setLightsOn(start, end),
+      off: (start, end) => this.#lightBoard.setLightsOff(start, end),
+      toggle: (start, end) => this.#lightBoard.toggleLights(start, end),
     };
-    const boardArea = this.#getBoardArea(start, end);
-    const commandToAction = validCommands[command];
 
-    boardArea.forEach(commandToAction);
+    const commandToAction = validCommands[command];
+    commandToAction(start, end);
   }
 
-  execute(instructions) {
-    instructions.forEach((instruction) => this.fudge(instruction));
+  execute(instructions, mode) {
+    const actions = {
+      setup: (instructions) => this.setUpLights(instructions),
+      adjust: (instructions) => this.adjustLights(instructions),
+    }
+    const actionToPerform = actions[mode];
 
+    instructions.forEach(actionToPerform);
+  }
+
+  countLitLights() {
     return this.#lightBoard.board.flat()
       .filter(light => light.isLit).length;
   }

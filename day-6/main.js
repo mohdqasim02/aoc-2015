@@ -7,9 +7,9 @@ const main = () => {
   const rawInstructions = fs.readFileSync("resources/instructions.txt", "utf-8");
   const instructions = parseInstruction(rawInstructions);
   const lbc = new LightBoardController(new LightBoard());
-  const numOfLitLights = lbc.execute(instructions);
 
-  console.log(numOfLitLights);
+  lbc.execute(instructions, "setup");
+  console.log("Number of lit lights:", lbc.countLitLights());
 };
 
 main();
