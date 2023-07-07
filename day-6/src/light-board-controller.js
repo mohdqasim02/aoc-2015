@@ -16,6 +16,17 @@ class LightBoardController {
     commandToAction(start, end);
   }
 
+  adjustLights([command, start, end]) {
+    const validCommands = {
+      on: (start, end) => this.#lightBoard.brightenLights(start, end),
+      off: (start, end) => this.#lightBoard.darkenLights(start, end),
+      toggle: (start, end) => this.#lightBoard.brightenLightsTwice(start, end),
+    };
+
+    const commandToAction = validCommands[command];
+    commandToAction(start, end);
+  }
+
   execute(instructions, mode) {
     const actions = {
       setup: (instructions) => this.setUpLights(instructions),
@@ -29,6 +40,13 @@ class LightBoardController {
   countLitLights() {
     return this.#lightBoard.board.flat()
       .filter(light => light.isLit).length;
+  }
+
+  getTotalBrightness() {
+    return this.#lightBoard.board.flat()
+      .reduce((total, light) => {
+        return total + light.brightness;
+      }, 0);
   }
 }
 

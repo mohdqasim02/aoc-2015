@@ -4,7 +4,7 @@ const { LightBoard } = require("../src/light-board");
 const { LightBoardController } = require("../src/light-board-controller");
 
 describe("LightBoardController", () => {
-  describe("fudge", () => {
+  describe("setUpLights", () => {
     const lightBoard = new LightBoard();
     const lbc = new LightBoardController(lightBoard);
 
@@ -45,25 +45,63 @@ describe("LightBoardController", () => {
     });
   });
 
-  describe("execute", () => {
-    const lbc = new LightBoardController(new LightBoard());
-    it("should give zero when all lights are unlit", () => {
-      const instructions = [
-        ["off", { rowStart: 0, colStart: 0 }, { rowEnd: 1, colEnd: 1 }]
-      ];
+  describe("adjustLights", () => {
+    it("should increase the total brightness by one", () => {
+      const lightBoard = new LightBoard();
+      const lbc = new LightBoardController(lightBoard);
+      const start = { rowStart: 0, colStart: 0 };
+      const end = { rowEnd: 0, colEnd: 0 };
 
-      lbc.execute(instructions, 'setup');
-      assert.deepStrictEqual(lbc.countLitLights(instructions), 0);
+      lbc.adjustLights(["on", start, end]);
+      assert.strictEqual(lbc.getTotalBrightness(), 1);
     });
 
-    it("should fudge instruction one by one and give count of lit lights", () => {
+    it("should increase the total brightness by 2000000", () => {
+      const lightBoard = new LightBoard();
+      const lbc = new LightBoardController(lightBoard);
+      const start = { rowStart: 0, colStart: 0 };
+      const end = { rowEnd: 999, colEnd: 999 };
+
+      lbc.adjustLights(["toggle", start, end]);
+      assert.strictEqual(lbc.getTotalBrightness(), 2000000);
+    });
+
+    it("should decrease the total brightness by 0", () => {
+      const lightBoard = new LightBoard();
+      const lbc = new LightBoardController(lightBoard);
+      const start = { rowStart: 0, colStart: 0 };
+      const end = { rowEnd: 9, colEnd: 9 };
+
+      lbc.adjustLights(["on", start, end]);
+      assert.strictEqual(lbc.getTotalBrightness(), 100);
+
+      lbc.adjustLights(["off", start, end]);
+      assert.strictEqual(lbc.getTotalBrightness(), 0);
+    });
+  });
+
+  describe("execute", () => {
+    const lbc = new LightBoardController(new LightBoard());
+    it("should setup all the lights mentioned in the instruction", () => {
       const instructions = [
         ["on", { rowStart: 0, colStart: 0 }, { rowEnd: 1, colEnd: 1 }],
         ["toggle", { rowStart: 7, colStart: 7 }, { rowEnd: 10, colEnd: 10 }]
       ];
 
       lbc.execute(instructions, 'setup');
-      assert.deepStrictEqual(lbc.countLitLights(instructions), 20);
+      assert.strictEqual(lbc.countLitLights(instructions), 20);
+      assert.strictEqual(lbc.getTotalBrightness(instructions), 0);
+    });
+
+    it("should adjust brightness of lights according to the instructions", () => {
+      const instructions = [
+        ["on", { rowStart: 0, colStart: 0 }, { rowEnd: 1, colEnd: 1 }],
+        ["toggle", { rowStart: 7, colStart: 7 }, { rowEnd: 10, colEnd: 10 }]
+      ];
+
+      lbc.execute(instructions, 'adjust');
+      assert.strictEqual(lbc.countLitLights(instructions), 20);
+      assert.strictEqual(lbc.getTotalBrightness(instructions), 36);
     });
   });
 });

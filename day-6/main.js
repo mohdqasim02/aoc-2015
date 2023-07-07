@@ -9,7 +9,10 @@ const main = () => {
   const lbc = new LightBoardController(new LightBoard());
 
   lbc.execute(instructions, "setup");
+  lbc.execute(instructions, "adjust");
+
   console.log("Number of lit lights:", lbc.countLitLights());
+  console.log("Total Brightness of lights:", lbc.getTotalBrightness());
 };
 
 main();
