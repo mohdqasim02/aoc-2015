@@ -14,28 +14,36 @@ class LightBoard {
     return newArrayOf(1000).map(arrayOf1000Lights);
   }
 
-  turnOn({ x, y }) {
-    const light = this.#board[x][y];
-    light.setLit();
+  #getBoardArea(start, end) {
+    const { rowEnd, colEnd } = end;
+    const { rowStart, colStart } = start;
+
+    return this.#board.slice(rowStart, rowEnd + 1)
+      .flatMap(lights => lights.slice(colStart, colEnd + 1));
   }
 
-  turnOff({ x, y }) {
-    const light = this.#board[x][y];
-    light.setUnlit();
+  setLightsOn(start, end) {
+    const lights = this.#getBoardArea(start, end);
+    lights.forEach(light => light.setLit());
   }
 
-  toggle({ x, y }) {
-    const light = this.#board[x][y];
-    light.toggle();
+  setLightsOff(start, end) {
+    const lights = this.#getBoardArea(start, end);
+    lights.forEach(light => light.setUnlit());
   }
 
-  isLitAt({ x, y }) {
-    const light = this.#board[x][y];
-    return light.isLit;
+  toggleLights(start, end) {
+    const lights = this.#getBoardArea(start, end);
+    lights.forEach(light => light.toggle());
   }
 
   get board() {
-    return this.#board;
+    return this.#board.map(row => row.map(light => {
+      return {
+        isLit: light.isLit,
+        brightness: light.brightness,
+      };
+    }));
   }
 }
 

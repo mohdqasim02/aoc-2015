@@ -3,42 +3,52 @@ const { describe, it } = require("node:test");
 const { LightBoard } = require("../src/light-board");
 
 describe("LightBoard", () => {
-  describe("turnOn", () => {
-    it("should turnOn the light at a given location", () => {
+  describe("setLightsOn", () => {
+    it("should turn On the lights only inside the given coordinates", () => {
       const lightBoard = new LightBoard();
-      const lightPosition = { x: 0, y: 0 };
+      const end = { rowEnd: 1, colEnd: 1 };
+      const start = { rowStart: 0, colStart: 0 };
 
-      lightBoard.turnOn(lightPosition);
-      assert.strictEqual(lightBoard.isLitAt(lightPosition), true);
+      lightBoard.setLightsOn(start, end);
+
+      assert.strictEqual(lightBoard.board[0][0].isLit, true);
+      assert.strictEqual(lightBoard.board[0][1].isLit, true);
+      assert.strictEqual(lightBoard.board[1][0].isLit, true);
+      assert.strictEqual(lightBoard.board[1][0].isLit, true);
+      assert.strictEqual(lightBoard.board[0][2].isLit, false);
+      assert.strictEqual(lightBoard.board[1][2].isLit, false);
     });
   });
 
-  describe("turnOff", () => {
-    it("should turnOff the light at a given location", () => {
+  describe("setLightsOff", () => {
+    it("should turn Off the lights only inside the given coordinates", () => {
       const lightBoard = new LightBoard();
-      const lightPosition = { x: 0, y: 0 };
+      const end = { rowEnd: 0, colEnd: 1 };
+      const start = { rowStart: 0, colStart: 0 };
 
-      lightBoard.turnOff(lightPosition);
-      assert.strictEqual(lightBoard.isLitAt(lightPosition), false);
+      lightBoard.setLightsOn(start, end);
+      assert.strictEqual(lightBoard.board[0][0].isLit, true);
+      assert.strictEqual(lightBoard.board[0][1].isLit, true);
+
+      lightBoard.setLightsOff(start, end);
+      assert.strictEqual(lightBoard.board[0][0].isLit, false);
+      assert.strictEqual(lightBoard.board[0][1].isLit, false);
     });
   });
 
-  describe("toggle", () => {
-    it("should turnOff the light at a given location if it is on", () => {
+  describe("toggleLights", () => {
+    it("should toggle the lights only inside the given coordinates", () => {
       const lightBoard = new LightBoard();
-      const lightPosition = { x: 0, y: 0 };
+      const end = { rowEnd: 0, colEnd: 1 };
+      const start = { rowStart: 0, colStart: 0 };
 
-      lightBoard.turnOn(lightPosition);
-      lightBoard.toggle(lightPosition);
-      assert.strictEqual(lightBoard.isLitAt(lightPosition), false);
-    });
+      lightBoard.toggleLights(start, end);
+      assert.strictEqual(lightBoard.board[0][0].isLit, true);
+      assert.strictEqual(lightBoard.board[0][1].isLit, true);
 
-    it("should turnOn the light at a given location if it is off", () => {
-      const lightBoard = new LightBoard();
-      const lightPosition = { x: 0, y: 0 };
-
-      lightBoard.toggle(lightPosition);
-      assert.strictEqual(lightBoard.isLitAt(lightPosition), true);
+      lightBoard.toggleLights(start, end);
+      assert.strictEqual(lightBoard.board[0][0].isLit, false);
+      assert.strictEqual(lightBoard.board[0][1].isLit, false);
     });
   });
 });
