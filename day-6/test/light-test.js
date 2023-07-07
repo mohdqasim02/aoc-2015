@@ -4,52 +4,42 @@ const { Light } = require("../src/light");
 
 describe("Light", () => {
   describe("setLit", () => {
-    it("should lit the light if the light is not lit", () => {
-      const led = new Light();
+    const led = new Light();
 
+    it("should lit the light if the light is not lit", () => {
       led.setLit();
       assert.strictEqual(led.isLit, true);
     });
 
     it("should leave the light lit if the light is already lit", () => {
-      const led = new Light();
-
-      led.setLit();
       led.setLit();
       assert.strictEqual(led.isLit, true);
     });
   });
 
   describe("setUnlit", () => {
+    const led = new Light();
     it("should unlit the light if the light is lit", () => {
-      const led = new Light();
-
       led.setLit();
       led.setUnlit();
       assert.strictEqual(led.isLit, false);
     });
 
     it("should leave the light unlit if the light is already unlit", () => {
-      const led = new Light();
-
       led.setUnlit();
       assert.strictEqual(led.isLit, false);
     });
   });
 
   describe("toggle", () => {
+    const led = new Light();
     it("should set light lit if light is unlit", () => {
-      const led = new Light();
-
       led.toggle();
       assert.strictEqual(led.isLit, true);
 
     });
 
     it("should set light unlit if light is lit", () => {
-      const led = new Light();
-
-      led.setLit();
       led.toggle();
       assert.strictEqual(led.isLit, false);
     });
@@ -69,8 +59,11 @@ describe("Light", () => {
       const led = new Light();
 
       led.incrementBrightness();
+      led.incrementBrightness();
+      assert.strictEqual(led.brightness, 2);
+
       led.decrementBrightness();
-      assert.strictEqual(led.brightness, 0);
+      assert.strictEqual(led.brightness, 1);
     });
 
     it("should decrease the brightness to a minimun of zero", () => {
@@ -86,7 +79,8 @@ describe("Light", () => {
       const led = new Light();
 
       led.increaseBrightnessByTwo();
-      assert.strictEqual(led.brightness, 2);
+      led.increaseBrightnessByTwo();
+      assert.strictEqual(led.brightness, 4);
     });
   });
 });
