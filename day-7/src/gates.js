@@ -1,26 +1,22 @@
 class Gates {
-  assign(wire, signal) {
-    wire.signal = signal;
+  and(signal1, signal2) {
+    return signal1 & signal2;
   }
 
-  and(wire1, wire2) {
-    return wire1.signal & wire2.signal;
+  or(signal1, signal2) {
+    return signal1 | signal2;
   }
 
-  or(wire1, wire2) {
-    return wire1.signal | wire2.signal;
+  complement(signal) {
+    return 65535 - signal;
   }
 
-  complement(wire) {
-    return 65535 - wire.signal;
+  leftShift(signal, places) {
+    return signal << places;
   }
 
-  leftShift(wire, places) {
-    return wire.signal << places;
-  }
-
-  rightShift(wire, places) {
-    return wire.signal >> places;
+  rightShift(signal, places) {
+    return signal >> places;
   }
 }
 
