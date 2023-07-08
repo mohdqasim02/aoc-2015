@@ -2,9 +2,12 @@ class Wire {
   #name;
   #inputSignal;
 
-  constructor(name, inputSignal) {
+  constructor(name) {
     this.#name = name;
-    this.#inputSignal = inputSignal;
+  }
+
+  set signal(signal) {
+    this.#inputSignal = signal;
   }
 
   get name() {
