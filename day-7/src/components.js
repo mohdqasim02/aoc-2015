@@ -23,9 +23,14 @@ const createComponent = (instruction) => {
   return component;
 }
 
+const updateComponent = (components, wireName, signal) => {
+  const component = components.find(({ output }) => output.name === wireName);
+  component.inputs = [signal];
+}
+
 const parseInstructions = (instructions) => {
   return instructions.trim().split("\n")
     .map(createComponent);
 }
 
-exports.parseInstructions = parseInstructions;
+module.exports = { parseInstructions, updateComponent };
