@@ -1,6 +1,6 @@
 const assert = require("assert");
 const { describe, it } = require("node:test");
-const { Circuit } = require("../src/circuit");
+const { Circuit, createCircuit } = require("../src/circuit");
 const { Gates } = require("../src/gates");
 const { Wire } = require("../src/wire");
 
@@ -169,6 +169,37 @@ describe("Circuit", () => {
         assert.strictEqual(circuit.add(component2), true);
         assert.strictEqual(ab.signal, 5);
       });
+    });
+  });
+
+  describe("createCircuit", () => {
+    it("should add components to the circuit", () => {
+      const circuit = new Circuit(new Gates());
+      const components = [
+        {
+          operation: "AND",
+          inputs: [new Wire('x'), new Wire('y')],
+          output: new Wire("xy"),
+        },
+        {
+          operation: "OR",
+          inputs: [new Wire('x'), new Wire('y')],
+          output: new Wire("ab"),
+        },
+        {
+          operation: "ASSIGN",
+          inputs: [4],
+          output: new Wire("x"),
+        },
+        {
+          operation: "ASSIGN",
+          inputs: [6],
+          output: new Wire("y"),
+        },
+      ];
+
+      createCircuit(components, circuit);
+      assert.deepStrictEqual(circuit.getWires(), { x: 4, y: 6, xy: 4, ab: 6 });
     });
   });
 });

@@ -61,6 +61,20 @@ class Circuit {
     this.#connect(component.operation, signals, destination);
     return true;
   }
+
+  getWires() {
+    return Object.fromEntries(Object.entries(this.#wires)
+      .map(([wireName, wire]) => {
+        return [wireName, wire.signal];
+      }));
+  }
 }
 
-exports.Circuit = Circuit;
+const createCircuit = (components, circuit) => {
+  const unresolved = components.filter(component => !circuit.add(component));
+
+  if (components.length > unresolved.length)
+    createCircuit(unresolved, circuit);
+}
+
+module.exports = { Circuit, createCircuit };
