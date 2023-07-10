@@ -9,7 +9,7 @@ describe("LightBoardController", () => {
     const lightBoard = new LightBoard(gridOfLights);
     const lbc = new LightBoardController(lightBoard);
 
-    it("should turn on the lights inside an area marked by coordinates", () => {
+    it("should turn on the lights inside an area marked by coordinates when the command is on", () => {
       const start = { rowStart: 0, colStart: 0 };
       const end = { rowEnd: 1, colEnd: 1 };
 
@@ -21,7 +21,7 @@ describe("LightBoardController", () => {
       assert.strictEqual(lightBoard.board[1][1].isLit, true);
     });
 
-    it("should turn off the lights inside an area marked by coordinates", () => {
+    it("should turn off the lights inside an area marked by coordinates when the command is off", () => {
       const start = { rowStart: 0, colStart: 0 };
       const end = { rowEnd: 1, colEnd: 0 };
 
@@ -33,7 +33,7 @@ describe("LightBoardController", () => {
       assert.strictEqual(lightBoard.board[1][1].isLit, true);
     });
 
-    it("should toggle the lights inside an area marked by coordinates", () => {
+    it("should toggle the lights inside an area marked by coordinates when the command is toggle", () => {
       const start = { rowStart: 0, colStart: 0 };
       const end = { rowEnd: 1, colEnd: 1 };
 
@@ -47,7 +47,7 @@ describe("LightBoardController", () => {
   });
 
   describe("adjustLights", () => {
-    it("should increase the total brightness by one", () => {
+    it("should increase the total brightness by one when only one light is turned on", () => {
       const gridOfLights = createGridOfLights(5, 5);
       const lightBoard = new LightBoard(gridOfLights);
       const lbc = new LightBoardController(lightBoard);
@@ -58,7 +58,7 @@ describe("LightBoardController", () => {
       assert.strictEqual(lbc.getTotalBrightness(), 1);
     });
 
-    it("should increase the total brightness by 2000000", () => {
+    it("should increase the total brightness to double the number of lights when all lights are toggled", () => {
       const gridOfLights = createGridOfLights(5, 5);
       const lightBoard = new LightBoard(gridOfLights);
       const lbc = new LightBoardController(lightBoard);
@@ -69,7 +69,7 @@ describe("LightBoardController", () => {
       assert.strictEqual(lbc.getTotalBrightness(), 50);
     });
 
-    it("should decrease the total brightness by 0", () => {
+    it("should decrease the total brightness to 0 when all the lights are turned off", () => {
       const gridOfLights = createGridOfLights(10, 10);
       const lightBoard = new LightBoard(gridOfLights);
       const lbc = new LightBoardController(lightBoard);
