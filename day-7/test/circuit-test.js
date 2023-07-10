@@ -104,18 +104,18 @@ describe("Circuit", () => {
         assert.strictEqual(ab.signal, 65530);
       });
 
-      it("through '<< gate' if the operation is 'LEFTSHIFT'", () => {
+      it("through '<< gate' if the operation is 'LSHIFT'", () => {
         const circuit = new Circuit(new Gates());
         const xy = new Wire("xy");
         const ab = new Wire("ab");
         const component = {
-          operation: "LEFTSHIFT",
+          operation: "LSHIFT",
           inputs: [5, 2],
           output: xy,
         };
 
         const component2 = {
-          operation: "LEFTSHIFT",
+          operation: "LSHIFT",
           inputs: [new Wire("x", 5), 1],
           output: ab,
         };
@@ -126,18 +126,18 @@ describe("Circuit", () => {
         assert.strictEqual(ab.signal, 10);
       });
 
-      it("through '>> gate' if the operation is 'RIGHTSHIFT'", () => {
+      it("through '>> gate' if the operation is 'RSHIFT'", () => {
         const circuit = new Circuit(new Gates());
         const xy = new Wire("xy");
         const ab = new Wire("ab");
         const component = {
-          operation: "RIGHTSHIFT",
+          operation: "RSHIFT",
           inputs: [5, 2],
           output: xy,
         };
 
         const component2 = {
-          operation: "RIGHTSHIFT",
+          operation: "RSHIFT",
           inputs: [new Wire("x", 5), 1],
           output: ab,
         };

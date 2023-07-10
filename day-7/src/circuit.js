@@ -28,8 +28,8 @@ class Circuit {
       OR: (signals) => this.#gates.or(...signals),
       AND: (signals) => this.#gates.and(...signals),
       NOT: (signals) => this.#gates.complement(...signals),
-      LEFTSHIFT: (signals) => this.#gates.leftShift(...signals),
-      RIGHTSHIFT: (signals) => this.#gates.rightShift(...signals),
+      LSHIFT: (signals) => this.#gates.leftShift(...signals),
+      RSHIFT: (signals) => this.#gates.rightShift(...signals),
     }
     const gateToConnect = validGates[gate];
     const signal = gateToConnect(signals);

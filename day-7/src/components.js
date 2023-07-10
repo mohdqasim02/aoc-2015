@@ -1,7 +1,7 @@
 const { Wire } = require("./wire");
 
 const createComponent = (instruction) => {
-  const OPERATORS = ["AND", "OR", "NOT", "LSHIFT", "LSHIFT"];
+  const OPERATORS = ["AND", "OR", "NOT", "LSHIFT", "RSHIFT"];
   const [source, destination] = instruction.trim().split(" -> ");
   const tokens = source.trim().split(" ");
 
