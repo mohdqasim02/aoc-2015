@@ -1,17 +1,15 @@
 const { Light } = require("./light");
 
-const newArrayOf = (size) => new Array(size).fill();
-const arrayOf1000Lights = () => newArrayOf(1000).map(() => new Light());
+const createGridOfLights = (rows, columns) => {
+  return new Array(rows).fill().map(_ => new Array(columns)
+    .fill().map(_ => new Light()));
+}
 
 class LightBoard {
   #board;
 
-  constructor() {
-    this.#board = this.#generateGridOfLights();
-  }
-
-  #generateGridOfLights() {
-    return newArrayOf(1000).map(arrayOf1000Lights);
+  constructor(grid) {
+    this.#board = grid;
   }
 
   #getBoardArea(start, end) {
@@ -62,4 +60,4 @@ class LightBoard {
   }
 }
 
-exports.LightBoard = LightBoard;
+module.exports = { LightBoard, createGridOfLights };

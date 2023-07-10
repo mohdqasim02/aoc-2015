@@ -1,12 +1,13 @@
 const fs = require("fs");
-const { LightBoard } = require("./src/light-board");
+const { LightBoard, createGridOfLights } = require("./src/light-board");
 const { parseInstruction } = require("./src/parser");
 const { LightBoardController } = require("./src/light-board-controller");
 
 const main = () => {
   const rawInstructions = fs.readFileSync("resources/instructions.txt", "utf-8");
   const instructions = parseInstruction(rawInstructions);
-  const lbc = new LightBoardController(new LightBoard());
+  const gridOfLights = createGridOfLights(1000, 1000);
+  const lbc = new LightBoardController(new LightBoard(gridOfLights));
 
   lbc.execute(instructions, "setup");
   lbc.execute(instructions, "adjust");

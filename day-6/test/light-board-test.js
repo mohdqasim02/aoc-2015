@@ -1,11 +1,12 @@
 const assert = require("assert");
 const { describe, it } = require("node:test");
-const { LightBoard } = require("../src/light-board");
+const { LightBoard, createGridOfLights } = require("../src/light-board");
 
 describe("LightBoard", () => {
   describe("setLightsOn", () => {
     it("should turn On the lights only inside the given coordinates", () => {
-      const lightBoard = new LightBoard();
+      const gridOfLights = createGridOfLights(5, 5);
+      const lightBoard = new LightBoard(gridOfLights);
       const end = { rowEnd: 1, colEnd: 1 };
       const start = { rowStart: 0, colStart: 0 };
 
@@ -22,7 +23,8 @@ describe("LightBoard", () => {
 
   describe("setLightsOff", () => {
     it("should turn Off the lights only inside the given coordinates", () => {
-      const lightBoard = new LightBoard();
+      const gridOfLights = createGridOfLights(5, 5);
+      const lightBoard = new LightBoard(gridOfLights);
       const end = { rowEnd: 0, colEnd: 1 };
       const start = { rowStart: 0, colStart: 0 };
 
@@ -38,7 +40,8 @@ describe("LightBoard", () => {
 
   describe("toggleLights", () => {
     it("should toggle the lights only inside the given coordinates", () => {
-      const lightBoard = new LightBoard();
+      const gridOfLights = createGridOfLights(5, 5);
+      const lightBoard = new LightBoard(gridOfLights);
       const end = { rowEnd: 0, colEnd: 1 };
       const start = { rowStart: 0, colStart: 0 };
 
@@ -54,7 +57,8 @@ describe("LightBoard", () => {
 
   describe("brightenLights", () => {
     it("should brighten up the lights by one inside the given coordinates", () => {
-      const lightBoard = new LightBoard();
+      const gridOfLights = createGridOfLights(5, 5);
+      const lightBoard = new LightBoard(gridOfLights);
       const end = { rowEnd: 1, colEnd: 1 };
       const start = { rowStart: 0, colStart: 0 };
 
@@ -71,7 +75,8 @@ describe("LightBoard", () => {
 
   describe("darkenLights", () => {
     it("should darken the lights by one inside the given coordinates", () => {
-      const lightBoard = new LightBoard();
+      const gridOfLights = createGridOfLights(5, 5);
+      const lightBoard = new LightBoard(gridOfLights);
       const end = { rowEnd: 1, colEnd: 1 };
       const start = { rowStart: 0, colStart: 0 };
 
@@ -87,7 +92,8 @@ describe("LightBoard", () => {
 
   describe("brightenLightsTwice", () => {
     it("should brighten the lights by two inside the given coordinates", () => {
-      const lightBoard = new LightBoard();
+      const gridOfLights = createGridOfLights(5, 5);
+      const lightBoard = new LightBoard(gridOfLights);
       const end = { rowEnd: 1, colEnd: 1 };
       const start = { rowStart: 0, colStart: 0 };
 

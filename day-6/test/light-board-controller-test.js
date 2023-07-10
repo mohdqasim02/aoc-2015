@@ -1,11 +1,12 @@
 const assert = require("assert");
 const { describe, it } = require("node:test");
-const { LightBoard } = require("../src/light-board");
+const { LightBoard, createGridOfLights } = require("../src/light-board");
 const { LightBoardController } = require("../src/light-board-controller");
 
 describe("LightBoardController", () => {
   describe("setUpLights", () => {
-    const lightBoard = new LightBoard();
+    const gridOfLights = createGridOfLights(5, 5);
+    const lightBoard = new LightBoard(gridOfLights);
     const lbc = new LightBoardController(lightBoard);
 
     it("should turn on the lights inside an area marked by coordinates", () => {
@@ -47,7 +48,8 @@ describe("LightBoardController", () => {
 
   describe("adjustLights", () => {
     it("should increase the total brightness by one", () => {
-      const lightBoard = new LightBoard();
+      const gridOfLights = createGridOfLights(5, 5);
+      const lightBoard = new LightBoard(gridOfLights);
       const lbc = new LightBoardController(lightBoard);
       const start = { rowStart: 0, colStart: 0 };
       const end = { rowEnd: 0, colEnd: 0 };
@@ -57,17 +59,19 @@ describe("LightBoardController", () => {
     });
 
     it("should increase the total brightness by 2000000", () => {
-      const lightBoard = new LightBoard();
+      const gridOfLights = createGridOfLights(5, 5);
+      const lightBoard = new LightBoard(gridOfLights);
       const lbc = new LightBoardController(lightBoard);
       const start = { rowStart: 0, colStart: 0 };
-      const end = { rowEnd: 999, colEnd: 999 };
+      const end = { rowEnd: 4, colEnd: 4 };
 
       lbc.adjustLights(["toggle", start, end]);
-      assert.strictEqual(lbc.getTotalBrightness(), 2000000);
+      assert.strictEqual(lbc.getTotalBrightness(), 50);
     });
 
     it("should decrease the total brightness by 0", () => {
-      const lightBoard = new LightBoard();
+      const gridOfLights = createGridOfLights(10, 10);
+      const lightBoard = new LightBoard(gridOfLights);
       const lbc = new LightBoardController(lightBoard);
       const start = { rowStart: 0, colStart: 0 };
       const end = { rowEnd: 9, colEnd: 9 };
@@ -81,7 +85,8 @@ describe("LightBoardController", () => {
   });
 
   describe("execute", () => {
-    const lbc = new LightBoardController(new LightBoard());
+    const gridOfLights = createGridOfLights(11, 11);
+    const lbc = new LightBoardController(new LightBoard(gridOfLights));
     it("should setup all the lights mentioned in the instruction", () => {
       const instructions = [
         ["on", { rowStart: 0, colStart: 0 }, { rowEnd: 1, colEnd: 1 }],
