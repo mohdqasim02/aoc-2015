@@ -9,9 +9,13 @@ class Circuit {
     this.#gates = gates;
   }
 
+  #addWire(wire) {
+    this.#wires[wire.name] = wire;
+  }
+
   #assign(wire, signal) {
     wire.signal = signal;
-    this.#wires[wire.name] = wire;
+    this.#addWire(wire);
   }
 
   #connect(gate, signals, destination) {
@@ -33,11 +37,17 @@ class Circuit {
     this.#assign(destination, signal);
   }
 
-  #extractIO({ inputs, output }) {
-    const signals = inputs.map(input => isNumber(input) ? input : input.signal);
-    const destination = output;
+  #getWireSignal(wire) {
+    if (!this.#wires[wire.name]) this.#addWire(wire);
+    return this.#wires[wire.name].signal;
+  }
 
-    return { signals, destination };
+  #extractIO({ inputs, output }) {
+    const signals = inputs.map(input => {
+      return isNumber(input) ? input : this.#getWireSignal(input);
+    });
+
+    return { signals, destination: output };
   }
 
   #areSignalsInvalid(signals) {
@@ -50,10 +60,6 @@ class Circuit {
     if (this.#areSignalsInvalid(signals)) return false;
     this.#connect(component.operation, signals, destination);
     return true;
-  }
-
-  get wires() {
-    return this.#wires;
   }
 }
 

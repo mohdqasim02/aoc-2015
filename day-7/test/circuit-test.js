@@ -147,6 +147,28 @@ describe("Circuit", () => {
         assert.strictEqual(circuit.add(component2), true);
         assert.strictEqual(ab.signal, 2);
       });
+
+      it("assign a signal to the wire if the operation is 'ASSIGN'", () => {
+        const circuit = new Circuit(new Gates());
+        const xy = new Wire("xy");
+        const ab = new Wire("ab");
+        const component = {
+          operation: "ASSIGN",
+          inputs: [5],
+          output: xy,
+        };
+
+        const component2 = {
+          operation: "AND",
+          inputs: [5, new Wire("xy")],
+          output: ab,
+        };
+
+        assert.strictEqual(circuit.add(component), true);
+        assert.strictEqual(xy.signal, 5);
+        assert.strictEqual(circuit.add(component2), true);
+        assert.strictEqual(ab.signal, 5);
+      });
     });
   });
 });
