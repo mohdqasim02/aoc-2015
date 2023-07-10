@@ -44,7 +44,7 @@ const numOfVisitedHousesIn2ndYear = (instructions) => {
 }
 
 const main = () => {
-  const rawInstructions = fs.readFileSync("day-3/input.txt", "utf-8");
+  const rawInstructions = fs.readFileSync("./input.txt", "utf-8");
   const instructions = parseInstructions(rawInstructions);
 
   // PART-1
