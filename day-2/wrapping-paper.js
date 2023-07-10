@@ -26,7 +26,7 @@ const totalRibbonLength = (dimensions) => {
 };
 
 const main = () => {
-  const rawDimensions = fs.readFileSync("day-2/input.txt", "utf-8");
+  const rawDimensions = fs.readFileSync("./input.txt", "utf-8");
   const dimensions = parseDimensions(rawDimensions);
 
   // PART-1
