@@ -31,7 +31,7 @@ describe("Gates", () => {
   });
 
   describe("leftShift", () => {
-    it("should left shift the signal of wire by provided places", () => {
+    it("should left shift the signal of wire by provided bits", () => {
       const gates = new Gates();
 
       assert.strictEqual(gates.leftShift(123, 2), 492);
@@ -40,7 +40,7 @@ describe("Gates", () => {
   });
 
   describe("rightShift", () => {
-    it("should right shift the signal of wire by provided places", () => {
+    it("should right shift the signal of wire by provided bits", () => {
       const gates = new Gates();
 
       assert.strictEqual(gates.rightShift(456, 2), 114);

@@ -11,12 +11,12 @@ class Gates {
     return 65535 - signal;
   }
 
-  leftShift(signal, places) {
-    return signal << places;
+  leftShift(signal, bits) {
+    return signal << bits;
   }
 
-  rightShift(signal, places) {
-    return signal >> places;
+  rightShift(signal, bits) {
+    return signal >> bits;
   }
 }
 
