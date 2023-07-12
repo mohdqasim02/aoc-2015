@@ -21,7 +21,7 @@ describe("matchsticks", () => {
   });
 
   describe("countInMemoryCharacters", () => {
-    it("should count each character as one character", () => {
+    it("should count character as one character based on how it is stored in the memory", () => {
       const strings = [
         `""`,
         `"abc"`,
@@ -34,7 +34,7 @@ describe("matchsticks", () => {
   });
 
   describe("countEncodedCharacters", () => {
-    it("should count each character as one character", () => {
+    it("should count each character as one character after encoding the string", () => {
       const strings = [
         `""`,
         `"abc"`,
