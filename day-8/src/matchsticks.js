@@ -10,10 +10,10 @@ const countInMemoryCharacters = (strings) => {
 
 const countEncodedCharacters = (strings) => {
   return strings.map(str => {
-    return str.replaceAll('"', '"\\"').replaceAll("\\x", "\\\\x").length;
+    const encodedString = str.replace(/(\\)/g, '\\$1').replace(/"/g, '\\"');
+    return encodedString.length + 2;
   }).reduce(sum, 0);
 }
-
 module.exports = {
   countLiteralCharacters,
   countInMemoryCharacters,

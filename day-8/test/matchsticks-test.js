@@ -35,14 +35,11 @@ describe("matchsticks", () => {
 
   describe("countEncodedCharacters", () => {
     it("should count each character as one character after encoding the string", () => {
-      const strings = [
-        `""`,
-        `"abc"`,
-        `"\\x27"`,
-        `"aaa\\"aaa"`
-      ];
-
-      assert.strictEqual(countEncodedCharacters(strings), 42);
+      assert.strictEqual(countEncodedCharacters([`""`]), 6);
+      assert.strictEqual(countEncodedCharacters([`"abc"`]), 9);
+      assert.strictEqual(countEncodedCharacters([`"\\\\"`]), 10);
+      assert.strictEqual(countEncodedCharacters([`"\\x27"`]), 11);
+      assert.strictEqual(countEncodedCharacters([`"aaa\\"aaa"`]), 16);
     });
   });
 });
