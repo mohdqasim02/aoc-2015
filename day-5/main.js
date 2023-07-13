@@ -13,6 +13,6 @@ const main = () => {
 
   // PART-2
   console.log("Num of nicer strings: ", numOfNiceStrings(rawText, isNicerString));
-}
+};
 
 main();

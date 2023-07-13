@@ -1,7 +1,7 @@
 const identity = (a) => a;
 const extractPattern = (text, pattern) => {
   return text.match(pattern) || [];
-}
+};
 
 const isNiceString = (text) => {
   const TwinCharacter = new RegExp(/(.)\1/);
@@ -12,7 +12,7 @@ const isNiceString = (text) => {
   const sameAdjacentLetter = extractPattern(text, TwinCharacter).length >= 1;
 
   return vowels && zeroBadCouples && sameAdjacentLetter;
-}
+};
 
 const isNicerString = (text) => {
   const SandwichLetters = new RegExp(/(.).\1/g);
@@ -21,12 +21,12 @@ const isNicerString = (text) => {
   const pair = extractPattern(text, PairAppearingTwice).length >= 1;
 
   return sandwich && pair;
-}
+};
 
 const numOfNiceStrings = (strings, isNice) => {
   return strings.trim().split("\n")
     .map(isNice).filter(identity).length;
-}
+};
 
 exports.isNiceString = isNiceString;
 exports.isNicerString = isNicerString;

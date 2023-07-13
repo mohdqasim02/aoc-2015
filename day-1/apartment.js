@@ -5,7 +5,7 @@ const sum = (a, b) => a + b;
 
 const finalFloor = (instructions) => {
   return instructions.reduce(sum, 0);
-}
+};
 
 const instructionPositionForBasement = (instructions) => {
   let floor = 0;
@@ -14,7 +14,7 @@ const instructionPositionForBasement = (instructions) => {
     if (floor === -1)
       return +position + 1;
   }
-}
+};
 
 const main = () => {
   const rawText = fs.readFileSync("./input.txt", "utf-8");
@@ -25,6 +25,6 @@ const main = () => {
 
   // PART-2
   console.log("Basement index:", instructionPositionForBasement(directions));
-}
+};
 
 main();

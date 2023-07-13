@@ -31,7 +31,7 @@ class LightBoardController {
     const actions = {
       setup: (instructions) => this.setUpLights(instructions),
       adjust: (instructions) => this.adjustLights(instructions),
-    }
+    };
     const actionToPerform = actions[mode];
 
     instructions.forEach(actionToPerform);

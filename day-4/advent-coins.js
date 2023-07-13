@@ -6,7 +6,7 @@ const generateHash = (secretWord, secretNumber) => {
 
   md5.update(secretKey);
   return md5.digest('hex');
-}
+};
 
 const findSecretNumber = (secretWord, zeroes) => {
   let potentialSecretNumber = 1;
@@ -17,7 +17,7 @@ const findSecretNumber = (secretWord, zeroes) => {
       return potentialSecretNumber;
     potentialSecretNumber++;
   }
-}
+};
 
 const main = () => {
   // PART 1
@@ -27,6 +27,6 @@ const main = () => {
   // PART 2
   secretNumber = findSecretNumber("iwrupvqb", "000000");
   console.log("SecretNumber for hash starting with six zeros: ", secretNumber);
-}
+};
 
 main();

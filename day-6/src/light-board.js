@@ -3,7 +3,7 @@ const { Light } = require("./light");
 const createGridOfLights = (rows, columns) => {
   return new Array(rows).fill().map(_ => new Array(columns)
     .fill().map(_ => new Light()));
-}
+};
 
 class LightBoard {
   #board;

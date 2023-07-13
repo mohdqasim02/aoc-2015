@@ -10,7 +10,7 @@ describe("components", () => {
         + "456 -> y" + "\n"
         + "x AND y -> d" + "\n"
         + "x OR y -> e" + "\n"
-        + "NOT y -> i"
+        + "NOT y -> i";
       const actualComponents = parseInstructions(instructions);
       const expectedComponents = [
         {

@@ -14,6 +14,6 @@ const main = () => {
 
   // PART-2
   console.log("Difference between literal length and encoded length is:", encodedLength - literalLength);
-}
+};
 
 main();

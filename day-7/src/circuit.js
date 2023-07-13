@@ -30,7 +30,7 @@ class Circuit {
       NOT: (signals) => this.#gates.complement(...signals),
       LSHIFT: (signals) => this.#gates.leftShift(...signals),
       RSHIFT: (signals) => this.#gates.rightShift(...signals),
-    }
+    };
     const gateToConnect = validGates[gate];
     const signal = gateToConnect(signals);
 
@@ -75,6 +75,6 @@ const createCircuit = (components, circuit) => {
 
   if (components.length > unresolved.length)
     createCircuit(unresolved, circuit);
-}
+};
 
 module.exports = { Circuit, createCircuit };

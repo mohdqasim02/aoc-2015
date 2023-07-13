@@ -5,7 +5,7 @@ const { parseInstructions, updateComponent } = require("./src/components");
 
 const readFile = () => {
   return fs.readFileSync("./resources/instructions.txt", "utf-8");
-}
+};
 
 const main = () => {
   const instructions = readFile();
@@ -22,6 +22,6 @@ const main = () => {
 
   console.log("Signal of wire a in part-1:", wireA);
   console.log("Signal of wire a in part-2:", circuit.getWires().a);
-}
+};
 
 main();

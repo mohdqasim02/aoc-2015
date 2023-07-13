@@ -34,6 +34,6 @@ const main = () => {
 
   // PART-2
   console.log("Total Ribbon Length: ", totalRibbonLength(dimensions));
-}
+};
 
 main();

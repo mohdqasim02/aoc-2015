@@ -7,7 +7,7 @@ const toMove = (instruction) => {
     'v': (position) => position.y -= 1,
     '>': (position) => position.x += 1,
     '<': (position) => position.x -= 1,
-  }
+  };
 
   return moves[instruction];
 };
@@ -26,7 +26,7 @@ const numOfVisitedHouses = (instructions) => {
   });
 
   return Object.keys(visitedHouseCoordinates).length;
-}
+};
 
 const numOfVisitedHousesIn2ndYear = (instructions) => {
   const visitedHouseCoordinates = {};
@@ -41,7 +41,7 @@ const numOfVisitedHousesIn2ndYear = (instructions) => {
   });
 
   return Object.keys(visitedHouseCoordinates).length;
-}
+};
 
 const main = () => {
   const rawInstructions = fs.readFileSync("./input.txt", "utf-8");
@@ -52,6 +52,6 @@ const main = () => {
 
   // PART-2
   console.log("Houses with atleast one gift in 2nd year: ", numOfVisitedHousesIn2ndYear(instructions));
-}
+};
 
 main();
